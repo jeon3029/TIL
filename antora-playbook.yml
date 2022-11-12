@@ -1,0 +1,12 @@
+site:
+  title: jeon3029 wiki
+  start_page: TJ-TIL::index.adoc 
+content:
+  sources:
+  - url: https://github.com/jeon3029/doc-component
+  # - url: /Users/user/Documents/p_workspace/antora/tj-til
+    branches: HEAD
+ui: 
+  bundle:
+    url: ./antora-ui-default/src
+    snapshot: true
