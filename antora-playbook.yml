@@ -3,8 +3,8 @@ site:
   start_page: TJ-TIL::index.adoc 
 content:
   sources:
-  # - url: https://github.com/jeon3029/til
-  - url : ./
+  - url: https://github.com/jeon3029/til
+  # - url : ./
     branches: HEAD
 ui: 
   bundle:
