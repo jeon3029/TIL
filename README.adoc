@@ -1,4 +1,16 @@
 = Demo Documentation Component A
+
+.Forked from 
+** https://gitlab.com/antora/antora[]
+** https://gitlab.com/antora/demo/demo-component-a.git[]
+** https://gitlab.com/antora/demo/demo-component-b.git[]
+
+== Local build
+[source, sh]
+----
+npx antora --fetch antora-playbook.yml
+----
+
 :url-project: https://antora.org
 :url-docs: https://docs.antora.org
 :url-org: https://gitlab.com/antora
