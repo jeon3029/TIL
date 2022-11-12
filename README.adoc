@@ -1,9 +1,22 @@
 = Demo Documentation Component A
 
 .Forked from 
-** https://gitlab.com/antora/antora[]
+* https://gitlab.com/antora/antora[]
+* Components
 ** https://gitlab.com/antora/demo/demo-component-a.git[]
 ** https://gitlab.com/antora/demo/demo-component-b.git[]
+* Ui Bundle
+** https://docs.antora.org/antora-ui-default/[]
+
+== Prerequirements
+* https://docs.antora.org/antora/latest/install-and-run-quickstart/[Reference]
+[source,sh]
+----
+$ node --version
+v16.18.0
+$ npm i -g @antora/cli@3.1 @antora/site-generator@3.1
+$ antora -v
+----
 
 == Local build
 [source, sh]
