@@ -1,7 +1,7 @@
 name: TJ-TIL
 title: TIL site
 version: 0.0.1
-start_page: inline-text-formatting.adoc
+start_page: first.adoc
 asciidoc:
   attributes:
     source-language: asciidoc@

@@ -1,8 +1,10 @@
-* xref:inline-text-formatting.adoc[]
-* xref:special-characters.adoc[]
-* xref:admonition.adoc[]
-* xref:sidebar.adoc[]
-* xref:ui-macros.adoc[]
-* test
-** xref:lists/ordered-list.adoc[]
-** xref:lists/unordered-list.adoc[]
+
+* ASCIIDOC
+** xref:asciidoc/inline-text-formatting.adoc[]
+** xref:asciidoc/special-characters.adoc[]
+** xref:asciidoc/admonition.adoc[]
+** xref:asciidoc/sidebar.adoc[]
+** xref:asciidoc/ui-macros.adoc[]
+** LIST
+*** xref:asciidoc/lists/ordered-list.adoc[]
+*** xref:asciidoc/lists/unordered-list.adoc[]

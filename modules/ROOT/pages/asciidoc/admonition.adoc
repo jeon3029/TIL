@@ -27,7 +27,7 @@ IMPORTANT: A monster lives in the basement.
 NOTE: If you go into the basement, see if you can find Kenny's orange parka.
 ----
 
-CAUTION: Don't stick forks in electric sockets.
+CAUTION: Don't stick forkㅍs in electric sockets.
 
 TIP: After someone sticks a fork in a socket, you'll need to reset the circuit in the breaker box in the dark and scary basement.
 
