@@ -5,14 +5,14 @@ ASCIIDOC 을 익히고 앞으로 해당 문법을 사용해서 컨텐츠를 정�
 
 .Asciidoc 지원 프레임워크 
 * https://gist.github.com/briandominick/e5754cc8438dd9503d936ef65fffbb2d[]
-
 이중에서 흥미가 생겼던 Antora 를 통해서 간단히 구축했다. 생성방법은 어렵지 않았다
 
 .Antora-Starter(참고)
 * https://docs.antora.org/antora/latest/install-and-run-quickstart/[]
 
 가이드 대로 따라한다면 다음과 같은 사이트를 만들어 낼 것이다.
-image:./image/img1.png[] 
+
+image::ascii/ascii_img1.jpg[] 
 
 
 로컬에서 `npx antora antora-playbook.yml` 를 통해 빌드가 되므로 이를 액션으로 감지하여 빌드하도록 했다.
