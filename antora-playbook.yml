@@ -1,16 +1,11 @@
 site:
   title: jeon3029 wiki
-  start_page: component-b::index.adoc 
+  start_page: TJ-TIL::index.adoc 
 
 content:
   sources:
   - url: https://github.com/jeon3029/til
     branches: HEAD
-#   - url : ./
-
-#   - url: https://gitlab.com/antora/demo/demo-component-b.git
-#     branches: [v2.0, v1.0]
-#     start_path: docs
 ui: 
   bundle:
     url: ./ui-bundle
