@@ -13,7 +13,9 @@ jobs:
       with:
         node-version: '16'
     - name: Install Antora
-      run: npm i antora
+      run: |
+        npm i antora
+        npm i @antora/lunr-extension
     - name: Generate Site
       run: npx antora --fetch antora-playbook.yml
     - name: Publish to GitHub Pages
