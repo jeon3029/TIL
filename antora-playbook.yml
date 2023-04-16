@@ -1,12 +1,21 @@
 site:
   title: jeon3029 wiki
-  start_page: TJ-TIL::index.adoc 
+  start_page: docs::index.adoc
 
 content:
   sources:
   - url: https://github.com/jeon3029/til
     branches: HEAD
+  # - url: ./
+    # branches: HEAD
+
 ui: 
   bundle:
     url: ./ui-bundle
     snapshot: true
+
+urls:
+  html_extension_style: indexify
+antora:
+  extensions:
+  - '@antora/lunr-extension'

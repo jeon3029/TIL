@@ -1,6 +1,6 @@
-name: TJ-TIL
-title: TIL site
-version: 0.0.1
+name: docs
+title: Dev Learning Archive
+version: ~
 start_page: first.adoc
 asciidoc:
   attributes:
