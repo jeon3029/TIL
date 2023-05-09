@@ -1,5 +1,6 @@
 * Writings
 ** xref:asciidoc/description.adoc[Asciidoc.. 어떤가?]
+** xref:share/chat-gpt.adoc[Chap-GPT]
 
 * Asciidoc Sample
 ** xref:asciidoc/sample/inline-text-formatting.adoc[]

@@ -1,0 +1,103 @@
+= Chat GPT 살펴보기 / 프롬프트 엔지니어링 맛보기
+:reproducible:
+:listing-caption: Source
+:source-highlighter: rouge
+:hardbreaks:
+
+== 내용 요약
+
+Chap-GPT 가 관심을 잠깐 꺼두었던 사이에 매우 발전하고 영향력있는 포지션으로 자리매김하고 있다.
+좀 더 잘 활용할 수 있는 방안을 조금이나마 정리해보았다.
+
+====
+* 공식적인 글과 내가 생각하고 있는 관점이 조금 혼재되어있음
+* 링크는 최대한 남겨놨음
+====
+
+.그냥 개인적인 생각
+* Chap-gpt 를 일상생활에서 좀 더 잘 써보자
+* 어떻게 하면 더 잘쓸수 있을까에 대한 고민
+** 영어공부를 하자
+* 의도적(또는 의식적..)으로 계속 써보자
+* 내 생산성을 최소 10~20퍼센트는 올려줄 수 있지 않을까?
+
+== 기본적인 원리
+
+.Reference : https://www.chatgpters.org/c/notice/chatgpt[chat-gpters 모임 중 활용방법 소개글]
+** 해당 커뮤니티에서 다양한 활용 사례들을 접할 수 있었다.
+** 지인이 여기서 운영하는 스터디에 참여하고 있는데 다양한 분야에서 활용하는 사례를 서로 공유하고 있다고 함.
+
+.ChatGPT는 대화 내용 중 약 4,000 토큰을 기억함
+*  과거 내용을 서서히 잊어버린다 (Convolution)
+* https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them
+
+.한글로 작성하면 토큰을 4배 더 사용함(때문에 영어로 질문해야 함)
+* 일반적인 질문 물어보기
+** 단순 질문 대답 형태도 대답을 잘 한다
+* 맥락을 통한 질문
+** 이부분이 바로 프롬프트 엔지니어링
+** 사용자가 원하는 내용을 정확하게 생성하기 위해 명확하고 구체적인 프롬프트를 제공하는 것
+
+== GPT 활용 플러그인 소개
+
+* vs-code / Intellij / .... 등등 개발 툴에서
+** 다양한 플러그인 있음. 모두다 api-key 를 제공해야 됨
+* chap-gpt 웹에서 쓸 때
+** Prompt Genie : 한영 자동 변환
+** aiprm : 프롬프트 제공(더 많은 프롬프트를 쓰려면 유료임..)
+*** 지인이 이거보다 Snack-Prompt 가 좋다고 하긴 함
+* chrome 검색
+** ChatGPT for Google
+
+* iphone
+** iphone 에서 gpt 바로 쓰기??
+
+
+== 프롬프트 엔지니어링 활용사례
+
+.잘 만들어진 프롬프트를 판매하기도 한다
+====
+* https://promptbase.com/
+====
+
+
+.잘 만들어진 프롬프트를 서로 공유하기
+====
+* https://github.com/f/awesome-chatgpt-prompts
+** https://prompts.chat/ 
+====
+
+
+.흥미로운 사례
+====
+. gpt jail-brake : https://chat.openai.com/c/659d0ae7-1d1f-46c5-af73-a7b3827fa62c
+
+. 리눅스 터미널로 활용하기 : https://www.engraved.blog/building-a-virtual-machine-inside/
+
+. midjourney : 프롬프트로 그림을 그려줌
+* gpt 가 midjourney 에 들어갈 프롬프트를 대신 작성해 준다면?
+====
+
+.Auto GPT
+====
+.goal 만 지정해주고 gpt 를 활용해서 방향을 알아서 찾아가는 모델이 있음
+* https://github.com/Significant-Gravitas/Auto-GPT
+* https://github.com/EvanLi/Github-Ranking/blob/master/Top100/Top-100-stars.md
+** github repo top 30 위치하고 있음
+** https://star-history.com/blog/star-history-monthly-pick-202303
+** https://godmode.space/
+====
+
+.Reference : 미래채널 MyF / 노마드 코더
+* https://www.youtube.com/watch?v=kmI9G5IrSQI&list=LL&index=8
+* https://www.youtube.com/watch?v=YbLef4CrZNU&list=LL&index=4
+
+== 기타
+
+. 국내 모 회사에서 api-token 을 나눠주고 gpt 쓰라고 한 사례가 있음
+
+. 3월 기준 빙(Bing)이 미국 검색 시장에서 점유율 30%을 차지(google 66.69%)
+
+
+
+
