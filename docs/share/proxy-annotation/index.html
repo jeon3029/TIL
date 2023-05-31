@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Spring AOP 이해.. @Async @Transactional 동작 원리 :: jeon3029 wiki</title>
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">jeon3029 wiki</a>
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Search the docs">
+        </div>
+      </div>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="https://github.com/jeon3029">Github</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="docs" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../../first/">Dev Learning Archive</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Writings</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../asciidoc/description/">Asciidoc.. 어떤가?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chat-gpt/">Chap-GPT</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Asciidoc Sample</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../asciidoc/sample/inline-text-formatting/">Inline Text Formatting</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../asciidoc/sample/special-characters/">Special Characters and Symbols</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../asciidoc/sample/admonition/">Admonition</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../asciidoc/sample/sidebar/">Sidebar</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../asciidoc/sample/ui-macros/">User Interface Macros</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Lists</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../asciidoc/sample/lists/ordered-list/">Ordered Lists</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../asciidoc/sample/lists/unordered-list/">Unordered Lists</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">test</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../testt/test/">스터디 재미있다.</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Dev Learning Archive</span>
+    <span class="version">default</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../../first/">Dev Learning Archive</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../first/">default</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../first/" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../first/">Dev Learning Archive</a></li>
+    <li><a href="./">Spring AOP 이해.. @Async @Transactional 동작 원리</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Spring AOP 이해.. @Async @Transactional 동작 원리</h1>
+<div class="sect1">
+<h2 id="_내용_요약"><a class="anchor" href="#_내용_요약"></a>내용 요약</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>같은 클래스 내에서 AOP 로 동작하는 어노테이션사용시 주의하자.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_transactional"><a class="anchor" href="#_transactional"></a>@Transactional</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>대략 이런 코드를 작성한 적이 있었음</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Controller
+public MyController{
+  @GetMapping()
+  public String test(){
+    myservice.transaction();
+  }
+}
+
+@Service
+public MyService{
+
+  public void transaction(List&lt;String&gt; elements){
+    elements.forEach(e-&gt;this.delete(e));
+  }
+
+  @Transactional
+  private void delete(){
+    dao.delete();
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>현재 코드에서 @Transactional 이 걸리지 않음. 왜그런걸까..??</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_spring_aop_방식"><a class="anchor" href="#_spring_aop_방식"></a>Spring AOP 방식</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>@Transactional 어노테이션을 선언한 메서드가 실행되기 전</p>
+<div class="ulist">
+<ul>
+<li>
+<p>transaction begin을 삽입하고</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>메서드 실행 후에</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Transaction commit 코드를 삽입</p>
+</li>
+<li>
+<p>객체 변경감지를 수행하도록 유도한다.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="img/1.png" alt="1">
+</div>
+</div>
+<div class="paragraph">
+<p>대략 이런 식</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public class MyServiceProxy {
+  private final MyService myservice;
+  private final TransactonManager manager = TransactionManager.getInstance();
+
+  public void delete(String name) {
+    try {
+      manager.begin();
+      myservice.delete(name);
+      manager.commit();
+    } catch (Exception e) {
+      manager.rollback();
+    }
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_transactional이_수행되지_않은_이유"><a class="anchor" href="#_transactional이_수행되지_않은_이유"></a>@Transactional이 수행되지 않은 이유</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>프록시 객체가 아닌 실제 MyService 객체의 함수를 호출<br>
+* <code>new MyService()</code> 하거나 Myservice.delete()<br>
+하게 되면 Spring의 도움을 받을 수 없으므로 동작할 수 없게 된다.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_해결_방법"><a class="anchor" href="#_해결_방법"></a>해결 방법</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>@Transactional 어노테이션 메서드는 클래스 내부적으로 사용하지 말고, 밖에서 사용.</p>
+</li>
+<li>
+<p>굳이 내부적으로 사용하려면, 자기 자신의 Proxy 객체를 사용하여 처리</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_비슷한_사례_async"><a class="anchor" href="#_비슷한_사례_async"></a>비슷한 사례 @Async</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public void asyncCall_1() {
+    System.out.println("[asyncCall_1] :: " + Thread.currentThread().getName());
+    // async call
+    emailService.sendMail();
+    emailService.sendMailWithCustomThreadPool();
+}
+
+public void asyncCall_2() {
+    System.out.println("[asyncCall_2] :: " + Thread.currentThread().getName());
+    EmailService emailService = new EmailService();
+    // not async call
+    emailService.sendMail();
+    emailService.sendMailWithCustomThreadPool();
+}
+
+public void asyncCall_3() {
+    System.out.println("[asyncCall_3] :: " + Thread.currentThread().getName());
+    // not async call
+    this.sendMail();
+}
+
+@Async
+public void sendMail() {
+    System.out.println("[sendMail] :: " + Thread.currentThread().getName());
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_reference"><a class="anchor" href="#_reference"></a>Reference</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://dzone.com/articles/effective-advice-on-spring-async-part-1" class="bare">https://dzone.com/articles/effective-advice-on-spring-async-part-1</a></p>
+</li>
+<li>
+<p><a href="https://medium.com/engineering-housing/proxy-pattern-and-spring-transactional-931ab6b55eee" class="bare">https://medium.com/engineering-housing/proxy-pattern-and-spring-transactional-931ab6b55eee</a></p>
+</li>
+<li>
+<p><a href="https://goodgid.github.io/SpringBoot-Why-doesn&#8217;t-it-work-with-Async/" class="bare">https://goodgid.github.io/SpringBoot-Why-doesn&#8217;t-it-work-with-Async/</a></p>
+</li>
+<li>
+<p><a href="https://velog.io/@ddongh1122/Spring-Transactional-%ED%81%B4%EB%9E%98%EC%8A%A4-%EB%82%B4%EB%B6%80-%ED%98%B8%EC%B6%9C-%EB%AF%B8%EC%9E%91%EB%8F%99-%EC%9D%B4%EC%8A%88" class="bare">https://velog.io/@ddongh1122/Spring-Transactional-%ED%81%B4%EB%9E%98%EC%8A%A4-%EB%82%B4%EB%B6%80-%ED%98%B8%EC%B6%9C-%EB%AF%B8%EC%9E%91%EB%8F%99-%EC%9D%B4%EC%8A%88</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script src="../../../_/js/vendor/lunr.js"></script>
+<script src="../../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../../.." data-snippet-length="100" data-stylesheet="../../../_/css/search.css"></script>
+<script async src="../../../search-index.js"></script>
+  </body>
+</html>
