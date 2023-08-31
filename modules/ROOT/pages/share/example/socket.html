@@ -1,0 +1,16 @@
+<script>
+// var socket = new WebSocket('ws://websocket-echo.com');
+var socket = new WebSocket('ws://localhost:9000');
+socket.onopen = function(event) {
+  socket.send('Some message'); // Sends data to server.
+};
+socket.onmessage = function(event) {
+  var message = event.data;
+  console.log(message);
+};
+ // Handle any error that occurs.
+socket.onerror = function(error) {
+  console.log('WebSocket Error: ' + error);
+};
+
+</script>

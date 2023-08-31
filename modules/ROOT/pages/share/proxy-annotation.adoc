@@ -47,7 +47,7 @@ public MyService{
 ** Transaction commit 코드를 삽입
 ** 객체 변경감지를 수행하도록 유도한다.
 
-image::img/1.png[]
+image::img/proxy-object.png[]
 
 대략 이런 식
 [source,java]

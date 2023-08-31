@@ -1,0 +1,27 @@
+= Webhacking 을 통한 Web 에 대한 이해
+
+:listing-caption: Source
+:source-highlighter: rouge
+:hardbreaks:
+
+== 웹해킹 관련 web 실습 등등
+
+* https://dreamhack.io/lecture/roadmaps/1
+
+
+.SOP, CORS 관련 실습 간단 소개
+* https://dreamhack.io/lecture/courses/186
+
+.XSS 관련 공격 코드 및 간단 실습
+====
+* https://learn.dreamhack.io/173
+
+* xss 공격의 예시
+** https://learn.dreamhack.io/173#6
+* Cross Site Scripting (XSS): 클라이언트 사이드 취약점, 공격자가 웹 리소스에 악성 스크립트를 삽입해 이용자의 웹 브라우저에서 해당 스크립트를 실행하는 취약점.
+* Stored XSS: 악성 스크립트가 서버 내에 존재, 이용자가 저장된 악성 스크립트를 조회할 때 발생
+* Reflected XSS: 악성 스크립트가 이용자 요청 내에 존재, 이용자가 악성 스크립트가 포함된 요청을 보낸 후 응답을 출력할 때 발생
+* 퀴즈
+** https://dreamhack.io/wargame/challenges/28/
+** https://tools.dreamhack.games/requestbin/ebvdlff
+====
