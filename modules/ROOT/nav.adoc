@@ -1,6 +1,8 @@
 * Writings
 ** xref:asciidoc/description.adoc[Asciidoc.. 어떤가?]
 ** xref:share/chat-gpt.adoc[Chap-GPT]
+** xref:share/web-hacking.adoc[]
+** xref:share/web-socket.adoc[]
 
 * Asciidoc Sample
 ** xref:asciidoc/sample/inline-text-formatting.adoc[]
