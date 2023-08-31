@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Spring AOP 이해.. @Async @Transactional 동작 원리 :: jeon3029 wiki</title>
+    <title>웹소켓 101 :: jeon3029 wiki</title>
     <meta name="generator" content="Antora 3.1.4">
     <link rel="stylesheet" href="../../../_/css/site.css">
     <script>var uiRootPath = '../../../_'</script>
@@ -129,7 +129,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../../first/">Dev Learning Archive</a></li>
-    <li><a href="./">Spring AOP 이해.. @Async @Transactional 동작 원리</a></li>
+    <li><a href="./">웹소켓 101</a></li>
   </ul>
 </nav>
 </div>
@@ -138,183 +138,163 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Spring AOP 이해.. @Async @Transactional 동작 원리</h1>
-<div class="sect1">
-<h2 id="_내용_요약"><a class="anchor" href="#_내용_요약"></a>내용 요약</h2>
+<h1 class="page">웹소켓 101</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>같은 클래스 내에서 AOP 로 동작하는 어노테이션사용시 주의하자.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_transactional"><a class="anchor" href="#_transactional"></a>@Transactional</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>대략 이런 코드를 작성한 적이 있었음</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Controller
-public MyController{
-  @GetMapping()
-  public String test(){
-    myservice.transaction();
-  }
-}
-
-@Service
-public MyService{
-
-  public void transaction(List&lt;String&gt; elements){
-    elements.forEach(e-&gt;this.delete(e));
-  }
-
-  @Transactional
-  private void delete(){
-    dao.delete();
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>현재 코드에서 @Transactional 이 걸리지 않음. 왜그런걸까..??</p>
+<p>웹 소켓(Web Socket)은 하나의 TCP 접속에 전이중 통신 채널을 제공하는 양방향 컴퓨터 통신 프로토콜<br>
+* 실시간 채팅, 게임, 주식 거래, 화상 채팅 등 Real-time Web Application 구현<br>
+* protocol :  ws (Web Socket), wss (Web Socket Secure)</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_spring_aop_방식"><a class="anchor" href="#_spring_aop_방식"></a>Spring AOP 방식</h2>
+<h2 id="_웹소켓_이전"><a class="anchor" href="#_웹소켓_이전"></a>웹소켓 이전</h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>@Transactional 어노테이션을 선언한 메서드가 실행되기 전</p>
-<div class="ulist">
-<ul>
-<li>
-<p>transaction begin을 삽입하고</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>메서드 실행 후에</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Transaction commit 코드를 삽입</p>
-</li>
-<li>
-<p>객체 변경감지를 수행하도록 유도한다.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
 <div class="imageblock unresolved">
 <div class="content">
-<img src="img/proxy-object.png" alt="proxy object">
+<img src="img/socket-1.png" alt="][">
 </div>
+</div>
+<div class="olist arabic">
+<div class="title">Polling</div>
+<ol class="arabic">
+<li>
+<p>서버로 주기적으로 요청을 날려 새로운 이벤트가 있는지 확인</p>
+</li>
+<li>
+<p>실시간 X</p>
+</li>
+</ol>
+</div>
+<div class="olist arabic">
+<div class="title">Long Polling</div>
+<ol class="arabic">
+<li>
+<p>이벤트 내용이 있을 때까지 기다렸다가 응답을 보냄</p>
+</li>
+<li>
+<p>이벤트가 많이 발생하여 시간 간격이 좁아지면 폴링과 큰 차이가 없음</p>
+</li>
+</ol>
+</div>
+<div class="olist arabic">
+<div class="title">Streaming</div>
+<ol class="arabic">
+<li>
+<p>커넥션을 맺은 후, 이벤트가 발생해도 서버는 이 커넥션을 끊지 않고 계속 flush</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>대략 이런 식</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public class MyServiceProxy {
-  private final MyService myservice;
-  private final TransactonManager manager = TransactionManager.getInstance();
-
-  public void delete(String name) {
-    try {
-      manager.begin();
-      myservice.delete(name);
-      manager.commit();
-    } catch (Exception e) {
-      manager.rollback();
-    }
-  }
-}</code></pre>
-</div>
+<p>&#8594; 모두 HTTP의 단방향 통신 규칙을 변경하지 않고 구현한 방식</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_transactional이_수행되지_않은_이유"><a class="anchor" href="#_transactional이_수행되지_않은_이유"></a>@Transactional이 수행되지 않은 이유</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>프록시 객체가 아닌 실제 MyService 객체의 함수를 호출<br>
-* <code>new MyService()</code> 하거나 Myservice.delete()<br>
-하게 되면 Spring의 도움을 받을 수 없으므로 동작할 수 없게 된다.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_해결_방법"><a class="anchor" href="#_해결_방법"></a>해결 방법</h2>
+<h2 id="_웹소켓"><a class="anchor" href="#_웹소켓"></a>웹소켓</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>@Transactional 어노테이션 메서드는 클래스 내부적으로 사용하지 말고, 밖에서 사용.</p>
+<p>최초 접속은 HTTP 요청을 통해 이루어짐</p>
 </li>
 <li>
-<p>굳이 내부적으로 사용하려면, 자기 자신의 Proxy 객체를 사용하여 처리</p>
+<p>ws로 프로토콜을 변환해서 커넥션을 맺음</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Socket 연결을 유지하는 자체가 비용 발생</p>
+</li>
+<li>
+<p>연결이 끊겼을 때에 대한 대응이 필요</p>
+</li>
+</ul>
+</div>
 </li>
 </ol>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_비슷한_사례_async"><a class="anchor" href="#_비슷한_사례_async"></a>비슷한 사례 @Async</h2>
+<h2 id="_동작방식"><a class="anchor" href="#_동작방식"></a>동작방식</h2>
 <div class="sectionbody">
 <div class="listingblock">
+<div class="title">Source 1. Request</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public void asyncCall_1() {
-    System.out.println("[asyncCall_1] :: " + Thread.currentThread().getName());
-    // async call
-    emailService.sendMail();
-    emailService.sendMailWithCustomThreadPool();
-}
-
-public void asyncCall_2() {
-    System.out.println("[asyncCall_2] :: " + Thread.currentThread().getName());
-    EmailService emailService = new EmailService();
-    // not async call
-    emailService.sendMail();
-    emailService.sendMailWithCustomThreadPool();
-}
-
-public void asyncCall_3() {
-    System.out.println("[asyncCall_3] :: " + Thread.currentThread().getName());
-    // not async call
-    this.sendMail();
-}
-
-@Async
-public void sendMail() {
-    System.out.println("[sendMail] :: " + Thread.currentThread().getName());
-}</code></pre>
+<pre class="highlightjs highlight"><code class="language-txt hljs" data-lang="txt">GET /chat HTTP/1.1
+Host: example.com:8000
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==
+Origin: http://example.com
+Sec-WebSocket-Protocol: chat, superchat
+Sec-WebSocket-Version: 13</code></pre>
 </div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Upgrade: websocket : 다른 프로토콜로 업그레이드 또는 변경하기 위한 규칙</p>
+</li>
+<li>
+<p>Connection: Upgrade : 송신자는 반드시 Upgrade 옵션을 지정한 Connection 헤더 필드가 필요</p>
+</li>
+<li>
+<p>Sec-WebSocket-Key: 신원 인증시 사용</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Source 2. Response</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">HTTP/1.1 101 Switching Protocols
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Sec-WebSocket-Accept:  Sec-WebSocket-Key를 사용하여 계산된 값</p>
+<div class="ulist">
+<ul>
+<li>
+<p>클라이언트에서 계산한 값과 일치해야 함</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_reference"><a class="anchor" href="#_reference"></a>Reference</h2>
+<h2 id="_데모"><a class="anchor" href="#_데모"></a>데모</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="./example/socket.html" class="bare">./example/socket.html</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_추가_유의점"><a class="anchor" href="#_추가_유의점"></a>추가 유의점?</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://dzone.com/articles/effective-advice-on-spring-async-part-1" class="bare">https://dzone.com/articles/effective-advice-on-spring-async-part-1</a></p>
+<p>Connection, Upgrade 헤더는 <code>hop-by-hop headers</code> 이다</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://datatracker.ietf.org/doc/html/rfc2616#section-13.5.1" class="bare">https://datatracker.ietf.org/doc/html/rfc2616#section-13.5.1</a></p>
 </li>
 <li>
-<p><a href="https://medium.com/engineering-housing/proxy-pattern-and-spring-transactional-931ab6b55eee" class="bare">https://medium.com/engineering-housing/proxy-pattern-and-spring-transactional-931ab6b55eee</a></p>
+<p>중간에 proxy 서버가 있는경우 변경될 수 있다.</p>
 </li>
-<li>
-<p><a href="https://goodgid.github.io/SpringBoot-Why-doesn&#8217;t-it-work-with-Async/" class="bare">https://goodgid.github.io/SpringBoot-Why-doesn&#8217;t-it-work-with-Async/</a></p>
-</li>
-<li>
-<p><a href="https://velog.io/@ddongh1122/Spring-Transactional-%ED%81%B4%EB%9E%98%EC%8A%A4-%EB%82%B4%EB%B6%80-%ED%98%B8%EC%B6%9C-%EB%AF%B8%EC%9E%91%EB%8F%99-%EC%9D%B4%EC%8A%88" class="bare">https://velog.io/@ddongh1122/Spring-Transactional-%ED%81%B4%EB%9E%98%EC%8A%A4-%EB%82%B4%EB%B6%80-%ED%98%B8%EC%B6%9C-%EB%AF%B8%EC%9E%91%EB%8F%99-%EC%9D%B4%EC%8A%88</a></p>
+</ul>
+</div>
 </li>
 </ul>
 </div>
