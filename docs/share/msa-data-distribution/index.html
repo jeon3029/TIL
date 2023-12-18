@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Spring AOP 이해.. @Async @Transactional 동작 원리 :: jeon3029 wiki</title>
+    <title>마이크로서비스 분산 트랜잭션 관리 :: jeon3029 wiki</title>
     <meta name="generator" content="Antora 3.1.5">
     <link rel="stylesheet" href="../../../_/css/site.css">
     <script>var uiRootPath = '../../../_'</script>
@@ -135,7 +135,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../../first/">Dev Learning Archive</a></li>
-    <li><a href="./">Spring AOP 이해.. @Async @Transactional 동작 원리</a></li>
+    <li><a href="./">마이크로서비스 분산 트랜잭션 관리</a></li>
   </ul>
 </nav>
 </div>
@@ -144,185 +144,177 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Spring AOP 이해.. @Async @Transactional 동작 원리</h1>
-<div class="sect1">
-<h2 id="_내용_요약"><a class="anchor" href="#_내용_요약"></a>내용 요약</h2>
+<h1 class="page">마이크로서비스 분산 트랜잭션 관리</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>같은 클래스 내에서 AOP 로 동작하는 어노테이션사용시 주의하자.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_transactional"><a class="anchor" href="#_transactional"></a>@Transactional</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>대략 이런 코드를 작성한 적이 있었음</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Controller
-public MyController{
-  @GetMapping()
-  public String test(){
-    myservice.transaction();
-  }
-}
-
-@Service
-public MyService{
-
-  public void transaction(List&lt;String&gt; elements){
-    elements.forEach(e-&gt;this.delete(e));
-  }
-
-  @Transactional
-  private void delete(){
-    dao.delete();
-  }
-}</code></pre>
-</div>
+<p>MSA 구조에서는 기존 모롤리틱 아키텍쳐와 비교해 DB 를 쪼개서 관리하고 있음</p>
 </div>
 <div class="paragraph">
-<p>현재 코드에서 @Transactional 이 걸리지 않음. 왜그런걸까..??</p>
+<p>기존구조를 전환한다고 할 때, 보통 리스크를 최소화하며 마이크로서비스로 전환해 나가기위해서는 백엔드 → 데이터베이스(데이터) → 프론트엔드 순으로 점진적인 변화</p>
 </div>
+<div class="paragraph">
+<p><span class="image unresolved"><img src="img/msa-1.png" alt="msa 1"></span></p>
 </div>
+<div class="paragraph">
+<p>마이크로서비스에서 데이터베이스를 분리하기 위해 분산 트랜잭션은 어떻게 관리되어야 할까?</p>
 </div>
-<div class="sect1">
-<h2 id="_spring_aop_방식"><a class="anchor" href="#_spring_aop_방식"></a>Spring AOP 방식</h2>
-<div class="sectionbody">
+<div class="paragraph">
+<p>트랜잭션 : ACID 원자성(Atomicity), 일관성(Consistency), 격리(Isolation) 및 내구성( Durability)</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>@Transactional 어노테이션을 선언한 메서드가 실행되기 전</p>
-<div class="ulist">
-<ul>
-<li>
-<p>transaction begin을 삽입하고</p>
+<p>원자성이 어떻게 보호?</p>
 </li>
 </ul>
-</div>
-</li>
-<li>
-<p>메서드 실행 후에</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Transaction commit 코드를 삽입</p>
-</li>
-<li>
-<p>객체 변경감지를 수행하도록 유도한다.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="imageblock unresolved">
-<div class="content">
-<img src="img/proxy-object.png" alt="proxy object">
-</div>
 </div>
 <div class="paragraph">
-<p>대략 이런 식</p>
+<p>예를 들어 고객이 탈퇴한다고 했을때
+- 고객서비스에서 고객정보 삭제
+- 송금서비스에서 고객정보 삭제</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public class MyServiceProxy {
-  private final MyService myservice;
-  private final TransactonManager manager = TransactionManager.getInstance();
-
-  public void delete(String name) {
-    try {
-      manager.begin();
-      myservice.delete(name);
-      manager.commit();
-    } catch (Exception e) {
-      manager.rollback();
-    }
-  }
-}</code></pre>
+<div class="paragraph">
+<p>위 두가지 행위가 같은 변경이지만, 다른 DB 에서 이루어 짐.</p>
 </div>
+<div class="paragraph">
+<p>두 서비스에서 동작하는 CUD 동작을 하나의 트랜잭션으로 묶어 처리할 수 있지만
+&#8594; 결합도를 낮추는 마이크로서비스를 구현하는 방식과는 맞지 않음</p>
+</div>
+<div class="paragraph">
+<p>2Phase Commit과 Saga Pattern 등으로 분산되어있는 환경에서 트랜잭션 관리를 해줌</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_transactional이_수행되지_않은_이유"><a class="anchor" href="#_transactional이_수행되지_않은_이유"></a>@Transactional이 수행되지 않은 이유</h2>
+<h2 id="_2phase_commit2pc"><a class="anchor" href="#_2phase_commit2pc"></a>2Phase Commit(2PC)</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>프록시 객체가 아닌 실제 MyService 객체의 함수를 호출<br>
-* <code>new MyService()</code> 하거나 Myservice.delete()<br>
-하게 되면 Spring의 도움을 받을 수 없으므로 동작할 수 없게 된다.</p>
+<p>투표 &#8594; 커밋하는 단계</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_해결_방법"><a class="anchor" href="#_해결_방법"></a>해결 방법</h2>
-<div class="sectionbody">
 <div class="olist arabic">
+<div class="title">투표 단계</div>
 <ol class="arabic">
 <li>
-<p>@Transactional 어노테이션 메서드는 클래스 내부적으로 사용하지 말고, 밖에서 사용.</p>
+<p>Coordinator는 고객서비스의 CUSTID 0001 삭제 요청과 이체서비스의 UserID가 0001인 행 삭제 요청을 보낸다.</p>
 </li>
 <li>
-<p>굳이 내부적으로 사용하려면, 자기 자신의 Proxy 객체를 사용하여 처리</p>
+<p>고객서비스와 이체서비스에서 상태 변경이 가능여부에 대해 투표하고 해당 Row에 lock을 잡는다.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>투표 결과 모두 가능하다고 하면 각 서비스에서 상태를 변경하고 다음 단계로 넘어간다.</p>
+</li>
+<li>
+<p>하나라도 상태 변경이 불가능하다고 투표하면 트랜잭션은 중단된다.</p>
 </li>
 </ol>
 </div>
+</li>
+</ol>
+</div>
+<div class="olist arabic">
+<div class="title">Commit 단계</div>
+<ol class="arabic">
+<li>
+<p>Coordinator는 Commit 메시지를 각 서비스로 전달한다.</p>
+</li>
+<li>
+<p>고객서비스는 CUSTID 0001인 Row를 삭제하고, 이체서비스는 UserID가 0001인 Row를 모두 삭제한다.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>2PC는 서비스가 증가할수록 시스템의 대기 시간이 길어지고 응답시간 증가</p>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_비슷한_사례_async"><a class="anchor" href="#_비슷한_사례_async"></a>비슷한 사례 @Async</h2>
+<h2 id="_saga_pattern"><a class="anchor" href="#_saga_pattern"></a>Saga Pattern</h2>
 <div class="sectionbody">
-<div class="listingblock">
+<div class="paragraph">
+<p>마이크로서비스들끼리 이벤트를 주고 받아 특정 마이크로서비스에서의 작업이 실패하면 이전까지의 작업이 완료된 마이크서비스들에게 보상(complemetary) 이벤트를 소싱</p>
+</div>
+<div class="paragraph">
+<p>Saga Pattern 은 여러 서비스에 걸친 트랜잭션을 관리하는 데에도 적합</p>
+</div>
+<div class="imageblock unresolved">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public void asyncCall_1() {
-    System.out.println("[asyncCall_1] :: " + Thread.currentThread().getName());
-    // async call
-    emailService.sendMail();
-    emailService.sendMailWithCustomThreadPool();
-}
-
-public void asyncCall_2() {
-    System.out.println("[asyncCall_2] :: " + Thread.currentThread().getName());
-    EmailService emailService = new EmailService();
-    // not async call
-    emailService.sendMail();
-    emailService.sendMailWithCustomThreadPool();
-}
-
-public void asyncCall_3() {
-    System.out.println("[asyncCall_3] :: " + Thread.currentThread().getName());
-    // not async call
-    this.sendMail();
-}
-
-@Async
-public void sendMail() {
-    System.out.println("[sendMail] :: " + Thread.currentThread().getName());
-}</code></pre>
+<img src="img/msa-2.png" alt="msa 2">
 </div>
 </div>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="img/msa-3.png" alt="msa 3">
 </div>
 </div>
-<div class="sect1">
-<h2 id="_reference"><a class="anchor" href="#_reference"></a>Reference</h2>
-<div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://dzone.com/articles/effective-advice-on-spring-async-part-1" class="bare">https://dzone.com/articles/effective-advice-on-spring-async-part-1</a></p>
-</li>
+<p>실패로 인한 Rollback 처리(보상 트랜잭션)은 DB 가 아닌, Application에서 구현</p>
+<div class="ulist">
+<ul>
 <li>
-<p><a href="https://medium.com/engineering-housing/proxy-pattern-and-spring-transactional-931ab6b55eee" class="bare">https://medium.com/engineering-housing/proxy-pattern-and-spring-transactional-931ab6b55eee</a></p>
-</li>
-<li>
-<p><a href="https://goodgid.github.io/SpringBoot-Why-doesn&#8217;t-it-work-with-Async/" class="bare">https://goodgid.github.io/SpringBoot-Why-doesn&#8217;t-it-work-with-Async/</a></p>
-</li>
-<li>
-<p><a href="https://velog.io/@ddongh1122/Spring-Transactional-%ED%81%B4%EB%9E%98%EC%8A%A4-%EB%82%B4%EB%B6%80-%ED%98%B8%EC%B6%9C-%EB%AF%B8%EC%9E%91%EB%8F%99-%EC%9D%B4%EC%8A%88" class="bare">https://velog.io/@ddongh1122/Spring-Transactional-%ED%81%B4%EB%9E%98%EC%8A%A4-%EB%82%B4%EB%B6%80-%ED%98%B8%EC%B6%9C-%EB%AF%B8%EC%9E%91%EB%8F%99-%EC%9D%B4%EC%8A%88</a></p>
+<p>트랜잭션 관리를 Application에서 하기 때문에 DBMS를 다른 제품군으로 구성할 수 있음</p>
 </li>
 </ul>
+</div>
+</li>
+<li>
+<p>전체 데이터가 동시에 영속화되는 것이 아니라 순차적인 단계로 트랜잭션이 이루어진다</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_choreography_based_saga"><a class="anchor" href="#_choreography_based_saga"></a>Choreography-Based Saga</h3>
+<div class="paragraph">
+<p>자신이 보유한 서비스 내 local 트랜잭션을 관리하며, 트랜잭션이 종료되면 완료 이벤트를 발행한다</p>
+</div>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="img/msa-4.png" alt="msa 4">
+</div>
+</div>
+<div class="paragraph">
+<p>구축하기 비교적 쉽지만 운영자의 입장에서 트랜잭션의 현재 상태를 알기가 어렵다
+. 서로의 명령을 소비해야 하기 때문에 Saga 참가자 간에 순환 종속성이 발생할 위험
+. 트랜잭션을 시뮬레이션하기 위해 모든 서비스를 실행해야 하므로 통합 테스트가 어렵다</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_orchestration_based_saga"><a class="anchor" href="#_orchestration_based_saga"></a>Orchestration-Based Saga</h3>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="img/msa-5.png" alt="msa 5">
+</div>
+</div>
+<div class="paragraph">
+<p>트랜잭션 처리를 위한 Saga 인스턴스(Manager)가 별도로 존재</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>트랜젝션에 관여하는 모든 서비스는 중계자에 의해서 점진적으로 트랜잭션을 수행하며 결과를 중계자에게 전달</p>
+</li>
+<li>
+<p>마지막 트랜잭션이 끝나게되면 중계자를 종료하면서 전체 트랜잭션 처리를 종료</p>
+</li>
+<li>
+<p>실패 시 보상 트랜잭션 발행</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">장점</div>
+<ol class="arabic">
+<li>
+<p>프로세스의 모든 참가자를 제어하고 활동 흐름을 제어할 수 있는 경우에 적합</p>
+</li>
+<li>
+<p>오케스트레이터는 일방적으로 Saga 참가자에 의존하기 때문에 순환 종속성 X</p>
+</li>
+</ol>
+</div>
 </div>
 </div>
 </div>
