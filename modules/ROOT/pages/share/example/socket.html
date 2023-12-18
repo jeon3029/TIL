@@ -1,16 +1,29 @@
 <script>
 // var socket = new WebSocket('ws://websocket-echo.com');
-var socket = new WebSocket('ws://localhost:9000');
-socket.onopen = function(event) {
-  socket.send('Some message'); // Sends data to server.
-};
-socket.onmessage = function(event) {
-  var message = event.data;
-  console.log(message);
-};
- // Handle any error that occurs.
-socket.onerror = function(error) {
-  console.log('WebSocket Error: ' + error);
-};
+// var socket = new WebSocket('ws://localhost:9000');
+function connectSocket() {
+  var socket = new WebSocket('ws://localhost:8001');
+  socket.onopen = function(event) {
+    console.log('socket connected')
+    socket.send('Some message'); // Sends data to server.
+  };
+  socket.onmessage = function(event) {
+    var message = event.data;
+    console.log(message);
+  };
+  // Handle any error that occurs.
+  socket.onerror = function(error) {
+    console.log('WebSocket Error: ' + error);
+  };
 
+  socket.onclose = function(event) {
+    console.log('Socket connection closed');
+    // Try to reconnect after a delay
+    setTimeout(function(){
+      connectSocket();
+      console.log('retry connect');
+    }, 2000);
+  };
+}
+connectSocket();
 </script>
