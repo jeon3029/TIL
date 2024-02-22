@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>분산 시스템의 골치거리 :: jeon3029 wiki</title>
+    <meta name="generator" content="Antora 3.1.7">
+    <link rel="stylesheet" href="../../../../_/css/site.css">
+    <script>var uiRootPath = '../../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../../..">jeon3029 wiki</a>
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Search the docs">
+        </div>
+      </div>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="https://github.com/jeon3029">Github</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="docs" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../../../first/">Dev Learning Archive</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Writings</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../asciidoc/description/">Asciidoc.. 어떤가?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../chat-gpt/">Chap-GPT</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../web-hacking/">Webhacking 을 통한 Web 에 대한 이해</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../web-socket/">웹소켓 101</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Asciidoc Sample</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../asciidoc/sample/inline-text-formatting/">Inline Text Formatting</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../asciidoc/sample/special-characters/">Special Characters and Symbols</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../asciidoc/sample/admonition/">Admonition</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../asciidoc/sample/sidebar/">Sidebar</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../asciidoc/sample/ui-macros/">User Interface Macros</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Lists</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../asciidoc/sample/lists/ordered-list/">Ordered Lists</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../asciidoc/sample/lists/unordered-list/">Unordered Lists</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">test</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../testt/test/">스터디 재미있다.</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Dev Learning Archive</span>
+    <span class="version">default</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../../../first/">Dev Learning Archive</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../../first/">default</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../../first/" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../../first/">Dev Learning Archive</a></li>
+    <li><a href="./">분산 시스템의 골치거리</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">분산 시스템의 골치거리</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>분산 컴퓨팅 환경에서는 단일 컴퓨팅 환경과 다르게 예측할 수 없는 부분에서 고장이 난다.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>이를 부분장애라고 하고, 부분장애는 비결정적이라서 어렵다.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_신뢰성_없는_네트워크"><a class="anchor" href="#_신뢰성_없는_네트워크"></a>신뢰성 없는 네트워크</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>분산시스템은 비공유 시스템이다. 즉 네트워크로 연결된 다수의 장비이다.</p>
+</li>
+<li>
+<p>각 노드들은 서로 다른 장비의 메모리나 디스크엔 접근할 수 없다. &#8594; 네트워크가 유일한 통신수단이다</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>네트워크는 메시지가 도착할 것인지는 보장하지 않음
+. 요청 손실(물리적인 이유 포함)
+. 요청이 큐에서 대기하다 나중에 전송
+. 원격 노드에 장애 발생
+. 원격 노드가 일시적으로 응답을 멈췄지만 나중에 다시 응답 시작
+. 응답이 네트워크상에서 유실
+. 응답이 지연되다가 나중에 전송</p>
+</div>
+<div class="paragraph">
+<p>응답을 받지 못했다면 그이유를 아는것은 불가능하다.
+&#8594; 이를 다루는 흔한 방법은 Timeout
+&#8594; 네트워크 결함이 드물더라도 결함이 일어날 수 있다는 사실은 인지하고 소프트웨어가 이를 처리할 수 있도록 설계 해야 한다</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_타임아웃"><a class="anchor" href="#_타임아웃"></a>타임아웃</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>타임아웃이 길면 노드가 죽었다고 선언될 때까지 기다리는 시간이 길어진다</p>
+</li>
+<li>
+<p>타임아웃이 짧으면 결함을 빨리 발견하지만 응답이 일시적으로 느려졌어도 죽었다고 선언할 가능성
+&#8594; 과부하 때문에 응답이 느릴 뿐일 수도 있다. 그 부하를 다른 노드로 전달하면 연쇄 장애를 유발할 수 있다.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_신뢰성_없는_시계"><a class="anchor" href="#_신뢰성_없는_시계"></a>신뢰성 없는 시계</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>분산 환경에서는 통신이 즉각적이지 않으므로 시간을 다루기 까다롭다.
+* 메세지를 받은 시간은 항상 보낸 시간보다 나중이지만, 여러 장비가 연관 될 때 일이 발생한 순서를 정확히 알아내기가 어렵다.
+* 각 장비는 자신만의 시간 내명이 있으며, 다른 장비보다 약간 차이날 수 있다.
+* NTP(Netword Time Protocol) 등으로 시간을 조정한다.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_램포트_타임스탬프_알고리즘"><a class="anchor" href="#_램포트_타임스탬프_알고리즘"></a>램포트 타임스탬프 알고리즘</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>분산 환경에서 타임스탬프 순서를 제공하는 하나의 방법</p>
+</div>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="lamport.png" alt="lamport">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_거짓말에_대한_보다_나은_신뢰성_제공"><a class="anchor" href="#_거짓말에_대한_보다_나은_신뢰성_제공"></a>거짓말에 대한 보다 나은 신뢰성 제공</h2>
+<div class="sectionbody">
+<div class="ulist">
+<div class="title">진실은 다수결로 결정된다</div>
+<ul>
+<li>
+<p>정족수, 즉 노드 사이의 투표에 의존한다</p>
+</li>
+<li>
+<p>특정한 노드 하나에 대한 의존을 줄이기 위해 결정을 하려면 여러 노드들로부터 어떤 최소 개수의 투표를 받아야 함</p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<div class="title">펜싱토큰</div>
+<ul>
+<li>
+<p>잘못된 리더 현상을 막기 위해 사용 / 자신의 펜싱토큰과 비교하여 오래되었다면 처리하지 않음(HBase 에 이러한 문제가 있었다)</p>
+</li>
+</ul>
+</div>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="fencing.png" alt="fencing">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_비잔틴_결함"><a class="anchor" href="#_비잔틴_결함"></a>비잔틴 결함</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>노드가 거짓말(임의의 결함이 있거나 오염된 응답을 보냄)을 할지도 모른다는 위험이 있다면 훨씬 더 어려워진다</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>일부 노드가 오작동하고 프로토콜을 준수하지 않거나 악의적인 공격자가 네트워크를 방해하더라도 시스템이 계속 올바르게 동작한다면 이 시스템은 비잔틴 내결함성을 지닌다</p>
+</li>
+<li>
+<p>비잔틴 내결함성 솔루션을 배치하는것은 비용이 커서 현실적이지 않음(각 노드가 독립적으로 구현된 다른 솔루션을 사용해야 함, 하나의 노드가 침해될 수 있다면 모든 노드가 침해될 수 있기 때문)</p>
+</li>
+<li>
+<p>현실적으로 모든 노드가 같은 솔루션을 사용하고 있기 때문에 인증, 접근제어, 암호화등으로 공격자로부터 보호</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_정리"><a class="anchor" href="#_정리"></a>정리</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>네트워크 (전송) 패킷은 손실되거나 지연될 수 있다. 응답 패킷도 마찬가지</p>
+</li>
+<li>
+<p>노드의 시계는 다른 노드의 시계와 심하게 맞지 않을 수 있다. (ntp 설정을 하더라도). 시간이 앞뒤로 뛸수도 있다. 시계에 의존하는것은 좋지 않다</p>
+</li>
+<li>
+<p>프로세스는 실행 도중 gc 때문에 (software 뿐만 아니라 hardware 도 마찬가지) 상당시간 멈출 수 있고 죽었다고 선언될 수 있으며 되살아 났을 때 이사실을 알지 못할 수 있다.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+<script src="../../../../_/js/vendor/lunr.js"></script>
+<script src="../../../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../../../.." data-snippet-length="100" data-stylesheet="../../../../_/css/search.css"></script>
+<script async src="../../../../search-index.js"></script>
+  </body>
+</html>
