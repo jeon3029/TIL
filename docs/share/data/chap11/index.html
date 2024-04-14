@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>스트림 처리 :: jeon3029 wiki</title>
+    <meta name="generator" content="Antora 3.1.7">
+    <link rel="stylesheet" href="../../../../_/css/site.css">
+    <script>var uiRootPath = '../../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../../..">jeon3029 wiki</a>
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Search the docs">
+        </div>
+      </div>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="https://github.com/jeon3029">Github</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="docs" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../../../first/">Dev Learning Archive</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Writings</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../asciidoc/description/">Asciidoc.. 어떤가?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../chat-gpt/">Chap-GPT</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../web-hacking/">Webhacking 을 통한 Web 에 대한 이해</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../web-socket/">웹소켓 101</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Asciidoc Sample</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../asciidoc/sample/inline-text-formatting/">Inline Text Formatting</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../asciidoc/sample/special-characters/">Special Characters and Symbols</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../asciidoc/sample/admonition/">Admonition</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../asciidoc/sample/sidebar/">Sidebar</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../asciidoc/sample/ui-macros/">User Interface Macros</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Lists</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../asciidoc/sample/lists/ordered-list/">Ordered Lists</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../asciidoc/sample/lists/unordered-list/">Unordered Lists</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">test</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../testt/test/">스터디 재미있다.</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Dev Learning Archive</span>
+    <span class="version">default</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../../../first/">Dev Learning Archive</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../../first/">default</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../../first/" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../../first/">Dev Learning Archive</a></li>
+    <li><a href="./">스트림 처리</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">스트림 처리</h1>
+<div class="sect1">
+<h2 id="_용어_정리"><a class="anchor" href="#_용어_정리"></a>용어 정리</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<div class="title">스트림</div>
+<p>시간 흐름에 따라 점진적으로 생산된 데이터</p>
+</div>
+<div class="paragraph">
+<div class="title">스트림 처리</div>
+<p>일괄 처리와 다르게, 단순히 이벤트가 발생할 때마다 처리</p>
+</div>
+<div class="paragraph">
+<div class="title">이벤트 스트림</div>
+<p>점진적인 처리, 시간별로 정렬된 일련의 비즈니스 이벤트</p>
+</div>
+<div class="ulist">
+<div class="title">이벤트 예시</div>
+<ul>
+<li>
+<p>웹페이지를 보거나 상품을 구입하는 일</p>
+</li>
+<li>
+<p>온도 센서 주기적으로 측정한 값
+&#8594; 특정 시점에 일어난 세부사항을 포함하는 작고 독립된 불변 객체</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>생산자(producer), 발생자(pubisher), 발송자(sender)는 이벤트를 만듦</p>
+</li>
+<li>
+<p>소비자(consumer), 구독자(subscriber), 수신자(recipient)는 이벤트를 처리</p>
+</li>
+<li>
+<p>스트림 시스템에서는 토픽(topic)이나 스트림으로 관련 이벤트를 묶음</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>메시징 시스템 두가지 케이스</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>(1) 생산자의 메시지 생성 속도 &gt; 소비자의 메시지 소비 속도"와 같은 상황</pre>
+</div>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>시스템은 메시지를 버린다.</p>
+</li>
+<li>
+<p>큐에 메시지를 버퍼링한다.</p>
+</li>
+<li>
+<p>배압(Backpressure, 흐름 제어)처리를 한다.
+(= 생산자가 메시지를 더는 보내지 못하게 막는다.)</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>(2) 노드가 죽거나 일시적으로 오프라인이 된다면 어떻게 될까?</pre>
+</div>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>DB를 사용할 때처럼 지속성을 갖추려면 디스크에 기록하거나 복제본을 생성하거나 둘 모두를 해야 한다.</p>
+</div>
+<div class="paragraph">
+<p>&#8594; 메세지를 잃어도 괜찮다면 처리량높이고 지연시간 낮출 수 있다.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_메세지_브로커"><a class="anchor" href="#_메세지_브로커"></a>메세지 브로커</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>많은 메시지 시스템은 생산자 &#8594; 소비자에게 직접 메시지를 전달한다.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>메시지 유실 가능성이 크다.</p>
+</li>
+<li>
+<p>소비자가 오프라인 상태라면 메시지를 전달받지 못하게 된다.</p>
+</li>
+<li>
+<p>메시지 브로커는 서버로 구동되고 생산자와 소비자는 서버의 클라이언트로 접속하여 메시지를 읽게 된다</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_메세지_브로커_vs_db"><a class="anchor" href="#_메세지_브로커_vs_db"></a>메세지 브로커 vs DB</h3>
+<div class="listingblock">
+<div class="title">생명주기</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">DB는 명시적으로 데이터 삭제 요청이 있기 전까지 데이터를 보관한다.
+반면 메시지 브로커 대부분은 소비자에게 데이터 전송이 성공할 경우 자동으로 삭제한다.
+그러므로 오랜 기간 데이터를 저장하는 용도로 메시지 브로커의 사용은 적절하지 않다.</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">작업 용량</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">메시지 브로커는 대부분 메시지를 빨리 지우므로 작업 용량이 상당히 작다.
+즉 큐 크기가 작다.</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">색인지원</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">DB 는 색인을 지원하고, 검색을 위한 다양한 방법을 제시. 메시지 브로커는 토픽 기준으로 부분집합을 구독한다.</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">데이터 변화</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">DB는 요청 시점의 스냅 샷을 기준으로 데이터를 반환한다.
+메시지 브로커는 데이터가 변하면 클라이언트에게 새로운 메시지가 생겼다는 알림을 줄 수 있다.</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_복수_소비자"><a class="anchor" href="#_복수_소비자"></a>복수 소비자</h3>
+<div class="ulist">
+<div class="title">로드 밸런싱</div>
+<ul>
+<li>
+<p>메시지 브로커는 랜덤으로 소비자를 선정해 메시지를 전달한다.</p>
+</li>
+<li>
+<p>메시지 처리 비용이 비싸 처리를 병렬화하기 위해 소비자를 추가하고 싶을 때 유용</p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<div class="title">팬 아웃</div>
+<ul>
+<li>
+<p>각 메시지는 모든 소비자에게 전달된다.(브로드캐스팅)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_확인_응답과_재전송"><a class="anchor" href="#_확인_응답과_재전송"></a>확인 응답과 재전송</h3>
+<div class="literalblock">
+<div class="content">
+<pre> 정상적으로 처리되지 못한 메시지를 재처리하기 위해 소비자는 브로커에게 다시 메시지를 달라고 요청
+-&gt; 바로 큐에서 삭제했다면 해당 메시지는 다시 받을 수 없게 된다
+-&gt; 소비자가 메시지를 받았는지 확인 후 메시지를 삭제하기 위해 확인 응답을 요구
+-&gt; 메시지 처리가 끝나면 브로커가 큐에서 메시지를 제거할 수 있게 브로커에게 명시적으로 알려야 한다</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_로그_기반_메시지_브로커"><a class="anchor" href="#_로그_기반_메시지_브로커"></a>로그 기반 메시지 브로커</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre> 기록을 남지지 않는 메시지 브로커 vs 기록하는 데이터 베이스
+-&gt; 데이터베이스의 지속성 있는 저장 방법과 메시징 시스템 지연 시간이 짧은 알림 기능의 조합이 로그 기반 메시지 브로커(log-based message broker)</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>생산자가 보낸 메시지는 로그 끝에 추가하고 소비자는 로그를 차례로 읽어 메시지를 받는다</p>
+</li>
+<li>
+<p>로그 끝에 도달하면 새 메시지가 추가됐다는 알림을 기다린다</p>
+</li>
+</ul>
+</div>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="img/broker.png" alt="broker">
+</div>
+</div>
+<div class="ulist">
+<div class="title">로그 방식과 전통적인 메시지 방식의 비교</div>
+<ul>
+<li>
+<p>로그 기반 접근법</p>
+</li>
+<li>
+<p>팬 아웃 메시징 방식을 제공한다.</p>
+</li>
+<li>
+<p>소비자가 서로 영향 없이 독립적으로 로그를 읽을 수 있고, 메시지를 읽어도 로그에서 삭제되지 않는다.</p>
+</li>
+<li>
+<p>개별 메시지를 소비자 클라이언트에 할당하지 않고, 소비자 그룹 간 로드 밸런싱한다.</p>
+</li>
+<li>
+<p>브로커는 소비자 그룹의 노드들에 전체 파티션을 할당할 수 있다.</p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<div class="title">로그 기반 접근법의 장단점</div>
+<ul>
+<li>
+<p>장점</p>
+<div class="ulist">
+<ul>
+<li>
+<p>초당 수백만 개의 메시지를 처리할 수 있다.</p>
+</li>
+<li>
+<p>메시지 순서가 중요하다면 효과적이다.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>단점</p>
+<div class="ulist">
+<ul>
+<li>
+<p>메시지 처리 비용이 비싸다.</p>
+</li>
+<li>
+<p>메시지 순서가 중요하지 않다면 JMS/AMQP 방식의 메시지 브로커가 더 적합하다.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>모든 메시지를 디스크에 기록하므로 로그 처리량은 일정하고 기본적으로 메모리에 메시지를 유지하고 큐가 너무 커지면 디스크에 기록하는 메시징 시스템과는 반대다.</p>
+</li>
+<li>
+<p>메모리에 메시지를 유지하는 시스템은
+큐가 작을 때는 빠르지만 디스크에 기록하기 시작하면 매우 느려짐</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_생산자_속도_소비자_속도"><a class="anchor" href="#_생산자_속도_소비자_속도"></a>생산자 속도 &gt; 소비자 속도</h3>
+<div class="literalblock">
+<div class="content">
+<pre> 로그 기반 접근법은 소비자가 메시지를 전송하는 생산자를 따라갈 수 없을 때 선택할 수 있는 선택지 중 하나인 버퍼링 형태이다.
+* 어떤 소비자의 처리 속도가 느려 메시지를 잃기 시작해도 해당 소비자만 영향을 받고 다른 소비자는 영향을 받지 않는다
+* 운영 서비스에 영향을 주지 않으면서 개발, 테스트, 디버깅 목적으로 운영 로그를 소비하는 실험을 할 수 있음</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+<script src="../../../../_/js/vendor/lunr.js"></script>
+<script src="../../../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../../../.." data-snippet-length="100" data-stylesheet="../../../../_/css/search.css"></script>
+<script async src="../../../../search-index.js"></script>
+  </body>
+</html>

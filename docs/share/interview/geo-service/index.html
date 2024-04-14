@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>근접성 서비스 :: jeon3029 wiki</title>
+    <meta name="generator" content="Antora 3.1.7">
+    <link rel="stylesheet" href="../../../../_/css/site.css">
+    <script>var uiRootPath = '../../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../../..">jeon3029 wiki</a>
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Search the docs">
+        </div>
+      </div>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="https://github.com/jeon3029">Github</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="docs" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../../../first/">Dev Learning Archive</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Writings</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../asciidoc/description/">Asciidoc.. 어떤가?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../chat-gpt/">Chap-GPT</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../web-hacking/">Webhacking 을 통한 Web 에 대한 이해</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../web-socket/">웹소켓 101</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Asciidoc Sample</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../asciidoc/sample/inline-text-formatting/">Inline Text Formatting</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../asciidoc/sample/special-characters/">Special Characters and Symbols</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../asciidoc/sample/admonition/">Admonition</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../asciidoc/sample/sidebar/">Sidebar</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../asciidoc/sample/ui-macros/">User Interface Macros</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Lists</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../asciidoc/sample/lists/ordered-list/">Ordered Lists</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../asciidoc/sample/lists/unordered-list/">Unordered Lists</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">test</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../testt/test/">스터디 재미있다.</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Dev Learning Archive</span>
+    <span class="version">default</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../../../first/">Dev Learning Archive</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../../first/">default</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../../first/" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../../first/">Dev Learning Archive</a></li>
+    <li><a href="./">근접성 서비스</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">근접성 서비스</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>주변에 있는 음식점, 호텔, 극장 등 가까운 시설을 검색할 수 있는 서비스 설계</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_문제_범위_확정"><a class="anchor" href="#_문제_범위_확정"></a>문제 범위 확정</h2>
+<div class="sectionbody">
+<div class="ulist">
+<div class="title">질문을 통해 범위를 확정(예시)</div>
+<ul>
+<li>
+<p>검색 반경 : 20km</p>
+</li>
+<li>
+<p>사업자 정보 추가 여부 : 사업장 소유주가 추가/갱신/삭제</p>
+</li>
+<li>
+<p>사용자 이동에 따른 갱신 여부 : 갱신필요 x</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_요구사항_및_규모_추정"><a class="anchor" href="#_요구사항_및_규모_추정"></a>요구사항 및 규모 추정</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>위치와 검색 반경정보에 근거해서 사업장 목록 반환</p>
+</li>
+<li>
+<p>사업장 소유주가 추가/삭제/갱신. 실시간 반영 x</p>
+</li>
+<li>
+<p>고객은 사업장 상세 정보를 확인할 수 있음</p>
+</li>
+<li>
+<p>응답 지연 최소화 / 데이터 보호 / 고가용성 등.. 비기능 요구사항 포함</p>
+</li>
+<li>
+<p>1억 user 기준 하루 5회 검색 &#8594; 1^8*5 / 1^5 = 5000qps(평균)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_개략적_설계안"><a class="anchor" href="#_개략적_설계안"></a>개략적 설계안</h3>
+<div class="paragraph">
+<p>api 설계</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">- 사업장 목록검색
+GET /v1/search/nearby
+parameter : latitude,longitude,radius
+response
+{
+  "total":10,
+  "businesses":[..]
+}
+
+- 사업장 crud
+GET /v1/businesses/:id
+POST /v1/businesses/:id
+PUT /v1/businesses/:id
+DELETE /v1/businesses/:id</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>데이터 모델
+- businuess
+business_id(pk)
+address
+city
+state
+country
+latitude
+longitude</p>
+</div>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="img/geo_architecture.png" alt="geo architecture">
+</div>
+</div>
+<div class="ulist">
+<div class="title">LBS</div>
+<ul>
+<li>
+<p>쓰기 요청이 없는, 읽기요청이 많은 서비스</p>
+</li>
+<li>
+<p>qps가 높고 무상태 서비스이므로 수평적 규모 확장이 용이</p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<div class="title">사업장 서비스</div>
+<ul>
+<li>
+<p>쓰기요청이며, qps 는 낮음</p>
+</li>
+<li>
+<p>고객이 사업장 정보를 조회(특정시간에 qps 높음)</p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<div class="title">db cluster</div>
+<ul>
+<li>
+<p>사업장 정보가 업데이트 되더라도 실시간 반영되지 않아도 되므로 복제에 시간이 걸려도 문제가 되지 않음</p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<div class="title">사업장 검색 알고리즘</div>
+<ul>
+<li>
+<p>실제로는 geohash in redis 등을 사용</p>
+</li>
+<li>
+<p>지리적 위치 색인이 어떻게 동작하는지를 설명</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_지리적_위치_색인_방안_고찰"><a class="anchor" href="#_지리적_위치_색인_방안_고찰"></a>지리적 위치 색인 방안 고찰..</h3>
+<div class="exampleblock">
+<div class="title">Example 1. 방안1. 직관적인 방법</div>
+<div class="content">
+<div class="listingblock">
+<div class="title">query</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">select business_id
+from business
+where latitude between {:my_lat} - radius AND {:my_lat} + radius
+AND longitude between {:my_long} - radius AND {:my_long} + radius</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><span class="image unresolved"><img src="img/geo_intersection.png" alt="geo intersection"></span></p>
+</div>
+<div class="paragraph">
+<p>다음 질의는 데이터가 2차원 적이므로 데이터의 양이 많아 효율성이 떨어진다</p>
+</div>
+<div class="paragraph">
+<p>&#8594; 근본적인 문제는 db 색인으로는 오직 한 차원의 검색속도만 개선이 가능
+&#8594; 2차원 데이터를 한 차원에 대응시킬 방법이 있을까..</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>해시기반 방안 : 균등격자, 지오해시, 카테르시안 계층</p>
+</li>
+<li>
+<p>트리기반 : 쿼드트리, 구글s2, r트리</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="exampleblock">
+<div class="title">Example 2. 방안2 : 균등 격자</div>
+<div class="content">
+<div class="paragraph">
+<p>지도를 균등한 크기의 격자로 쪼개서 각 격자안에 사업장을 담음
+&#8594; 사업장 분포가 동일하지 않으므로 데이터 분포가 균등하지 않음
+&#8594; 격자의 인접 격자를 찾기가 까다로움</p>
+</div>
+</div>
+</div>
+<div class="exampleblock">
+<div class="title">Example 3. 방안3: 지오해시</div>
+<div class="content">
+<div class="paragraph">
+<p>위도경도 데이터를 1차원 문자열로 반환
+비트를 하나씩 늘려가며 재귀적으로 작은 문자로 분할</p>
+</div>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="img/geo_grid.png" alt="geo grid">
+</div>
+</div>
+<div class="paragraph">
+<p>example
+구글 본사 : 1001 11010 01001 10001 11111 11110
+&#8594; base32 : 9q9hvu
+메타 본사 : 1001 11010 01001 10011 10001 11011
+&#8594; base32 : 9q9jhr
+원하는 정밀도에 따라 지오해시 길이를 조정(0.5km : 6)</p>
+</div>
+<div class="paragraph">
+<p>공통 접두어를 가지고 있음. 하지만 단순히 공통 접두어 prefix 로 검색하면 안 됨.
+- 인접한 위치더라도 공통 접두어가 달라질 수 있음
+- 원하는 사업장이 2개격자, 3개격자를 모두 포함하는 경우
+- 원하는 위치 및 인접 격자의 정보를 constant 시간에 가져와서 계산</p>
+</div>
+</div>
+</div>
+<div class="exampleblock">
+<div class="title">Example 4. 방안4: 쿼드트리</div>
+<div class="content">
+<div class="paragraph">
+<p>사업장의 개수가 특정 개수(가령 100개) 개 될 때 까지 재귀적으로 2차원 공간을 분할하여 저장
+&#8594; 쿼드트리는 db 가 아님. 각 lbs 서버 안에 인메모리 형태로 구축
+image::img/geo_quad-tree.png[]
+- 각 노드에는 좌상단, 우하단 꼭지점 좌표 기록
+- leaf node 에는 사업장 목록 포함</p>
+</div>
+<div class="paragraph">
+<p>총 메모리 요구량을 대략적으로 계산해보면 2백만 노드 기준 2G 정도(서버 한대에 충분히 올릴 수 있는 정도이다)</p>
+</div>
+<div class="paragraph">
+<p>문제점?
+&#8594; 신규 트리를 구축하는게 관건. 모든 서버를 한번에 띄우면 db 에 매우 많은 부하.
+&#8594; 갱신? 점진적 갱신(다음날 반영등..) 실시간갱신은 어려움 : lock 매커니즘 필요</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_상세_설계"><a class="anchor" href="#_상세_설계"></a>상세 설계</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>지오해시 방법 사용</p>
+</div>
+<div class="ulist">
+<div class="title">geohash_index</div>
+<ul>
+<li>
+<p>geohash(pk)</p>
+</li>
+<li>
+<p>business_id(pk)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>지오해시의 규모 확장
+&#8594; 샤딩? 데이터의 양이 크지 않아 샤딩은 필요 없음. 문제를 최대한 복잡하지 않은 방법으로 풀어야 함. 다만, 읽기 부하를 나눌 사본 db 를 두는 방식으로 해결</p>
+</div>
+<div class="exampleblock">
+<div class="title">Example 5. 캐시</div>
+<div class="content">
+<div class="paragraph">
+<p>캐시 도입 전에는 정말 필요한가? 에 대한 질문을 던져야 한다.
+* 읽기 중심이고, db 크기는 상대적으로 작아서 서버 한대에 수용 가능하다면 &#8594; 메모리캐시를 사용할 때와 비슷
+* 읽기 성능이 병목이라면 &#8594; db 를 증설하는 방향 고려
+* 캐시가 사업적 요구사항을 만족하는데 중요한 역할을 한다는 확신이 든다면.. 그때부터 생각</p>
+</div>
+<div class="paragraph">
+<p>다음과 같은 데이터를 캐시에 보관하면 성능 향상이 가능</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>지오해시 : 격자내의 사업장 id 목록
+&#8594; 몇단계 지오해시 정보를 저장할 것인가
+&#8594; 4,5,6 3단계 정보를 저장</p>
+</li>
+<li>
+<p>사업장id : 사업장 정보 객체</p>
+<div class="ulist">
+<ul>
+<li>
+<p>사업장 정보를 200m 으로 가정할 때 8*200m*3 ~= 5G</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>대륙을 넘나드는 트래픽 전송지연을 방지하려면 지역별로 중복 저장</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_최종_설계_형태"><a class="anchor" href="#_최종_설계_형태"></a>최종 설계 형태</h2>
+<div class="sectionbody">
+<div class="imageblock unresolved">
+<div class="content">
+<img src="img/geo_final.png" alt="geo final">
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+<script src="../../../../_/js/vendor/lunr.js"></script>
+<script src="../../../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../../../.." data-snippet-length="100" data-stylesheet="../../../../_/css/search.css"></script>
+<script async src="../../../../search-index.js"></script>
+  </body>
+</html>
