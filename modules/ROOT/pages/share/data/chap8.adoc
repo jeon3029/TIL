@@ -38,7 +38,7 @@
 
 분산 환경에서 타임스탬프 순서를 제공하는 하나의 방법
 
-image::lamport.png[] 
+image::img/lamport.png[] 
 
 
 == 거짓말에 대한 보다 나은 신뢰성 제공
@@ -50,7 +50,7 @@ image::lamport.png[]
 .펜싱토큰
 * 잘못된 리더 현상을 막기 위해 사용 / 자신의 펜싱토큰과 비교하여 오래되었다면 처리하지 않음(HBase 에 이러한 문제가 있었다)
 
-image::fencing.png[] 
+image::img/fencing.png[] 
 
 
 == 비잔틴 결함 
